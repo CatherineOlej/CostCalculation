@@ -100,7 +100,7 @@ namespace CostCalculation
                     string numOfOrders = Console.ReadLine(); //converting string to int
                     itemAmount = int.Parse(numOfOrders);
                     Console.WriteLine("Is this correct? (Y/N): " + itemAmount); //confirm amount
-                    string isCorrect = Console.ReadLine();
+                    
                     
                     bool correct = true;
                     while (correct)
