@@ -106,7 +106,6 @@ namespace CostCalculation
                     while (correct)
                     {
                         
-                        //string numOfOrders = Console.ReadLine();
                         if (numOfOrders == "y" || numOfOrders == "Y")
                         {
                             Console.WriteLine("Are you a student? (Y/N)");
