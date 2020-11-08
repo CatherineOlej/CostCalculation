@@ -16,9 +16,14 @@ namespace CostCalculation
             string address;
             string areaLocation; //city, province, postal code
             string instructions;
+            string delivery;
+            string pickup;
             double phoneNum;
 
-            decimal[] reciept = {0,0,0,0,0 };
+            decimal[] reciept = {0,0,0,0,0,0 };
+            //decimal[] delivery = {0,0 };
+
+            string[] strArray = { "delivery", "pickup" };
             
             Console.ForegroundColor = ConsoleColor.Magenta;//changes color of text
             //intro to project
@@ -35,9 +40,20 @@ namespace CostCalculation
             areaLocation = Console.ReadLine();
             Console.WriteLine("Please provide a phone number we can reach you at");
             phoneNum = double.Parse(Console.ReadLine());
+
+            //ask user if pickup or delivery
+            //Console.WriteLine("Please specify: 1)Delivery or 2)Pickup");
+            Console.WriteLine("Please specify:");
+            Console.WriteLine("1) Delivery");
+            Console.WriteLine("2) Pickup");
+            delivery = Console.ReadLine();
+            pickup = Console.ReadLine();
+
+            //if delivery, provide special instructions
             Console.WriteLine("Please provide special instructions for deliveries from this address");
             instructions = Console.ReadLine();
 
+     
             //now ordering begins
             Console.WriteLine("Great! Now that we have your delivery information lets get into ordering some food");
             double choice;
@@ -71,34 +87,36 @@ namespace CostCalculation
 
             Console.Clear();
             //Data recipt of the order
-            Console.WriteLine("");
             Console.WriteLine(fullName);
-            Console.WriteLine("");
             Console.WriteLine(address);
-            Console.WriteLine("");
             Console.WriteLine(areaLocation);
-            Console.WriteLine("");
             Console.WriteLine(phoneNum);
-            Console.WriteLine("");
             Console.WriteLine(instructions);
-            Console.WriteLine("");
             Console.WriteLine("------------------");
             Console.WriteLine("");
             Console.WriteLine("Item Amt: " + reciept[3]);
             Console.WriteLine("Name of the dinner: " + choice);
+            Console.WriteLine("10% student savings: " + "$" + reciept[1]);
+            Console.WriteLine("Sub Total: " + "$" + reciept[4]);
+            Console.WriteLine("Tax (13%): " + "$" + reciept[2]);
             Console.WriteLine("");
-            Console.WriteLine("10% student savings: " + reciept[1]);
-            Console.WriteLine("Sub Total: " + reciept[4]);
-            Console.WriteLine("Tax (13%): " + reciept[2]);
-            Console.WriteLine("");
-            Console.WriteLine("TOTAL: " + reciept[0]);
+            Console.WriteLine("TOTAL: " + "$" + reciept[0]);
             Console.ReadKey(true);
         }
-    
+        //bool delivery;
+        //static void Delivery()
+        //{
+        //    bool delivery = false;
+        //    if (delivery == true)
+        //    {
+        //        string deliveryFee = Total + 5;
+        //    }
+        //}
 
         public static decimal[] BurgerCombo()
         {
             int itemAmount = 0;
+            decimal deliveryFee = 5;
             string Student; 
             
             decimal HST = 1.13M;
@@ -107,7 +125,33 @@ namespace CostCalculation
             decimal subTotal = 0;
             decimal taxAmount = 0;
             decimal priceComboOne = 0;
+            decimal deliveryCharge = 0;
 
+            Console.WriteLine("Please specify:");
+            Console.WriteLine("1) Delivery");
+            Console.WriteLine("2) Pickup");
+            string delivery = Console.ReadLine();
+            string pickup = Console.ReadLine();
+
+            //bool delivery = false;
+
+            //understand array
+            //while (delivery == "1")
+            //{
+            //    if (Total <= 30)
+            //    {
+            //        deliveryCharge = Total + 5;
+            //    }
+            //    if (Total >= 30)
+            //    {
+            //        deliveryCharge = Total - 5;
+            //        Console.WriteLine("Waived");
+            //    }
+                
+            //string[] strArray = { "delivery", "pickup" };
+            //    return strArray;
+            //}
+            
             Console.WriteLine("How many of those meals are being ordered today?"); //ask how many they want
             string numOfOrders = Console.ReadLine(); //converting string to int
             itemAmount = int.Parse(numOfOrders);
@@ -130,7 +174,6 @@ namespace CostCalculation
                     taxAmount = Math.Round(taxAmount, 2);
                     Total = subTotal + taxAmount;
                     break;
-
                 }
                 else if (Student == "n" || Student == "N") //if not a student do the following
                 {
@@ -140,9 +183,9 @@ namespace CostCalculation
                     taxAmount = Math.Round(taxAmount, 2);
                     Total = subTotal + taxAmount;
                     break;
-
                 }
             }
+
             decimal[] arr2 = {Total, savings, taxAmount, itemAmount, subTotal };
             return arr2;
         } 
@@ -166,7 +209,7 @@ namespace CostCalculation
                 string answer = Console.ReadLine();
 
                 while (answer == "y" || answer == "Y") //calculations will take place once order is confirmed
-            {
+                {
                     Console.WriteLine("Are you a student? (Y/N)");
                     Student = Console.ReadLine();
 
